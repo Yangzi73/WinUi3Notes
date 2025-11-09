@@ -7,6 +7,9 @@ using Windows.Storage;//作用:
 
 namespace WinUINotes.Models
 {
+    /// <summary>
+    /// 12
+    /// </summary>
     public class Note
     {
         private StorageFolder storeageFolder = ApplicationData.Current.LocalFolder;
