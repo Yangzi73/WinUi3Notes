@@ -1,0 +1,29 @@
+## 忽略生成文件
+[Bb]in/
+[Oo]bj/
+[Bb]uild/
+
+## 忽略NuGet包目录
+packages/
+[Nn]u[Gg]et/
+*.nupkg
+
+## 忽略用户特定文件
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## 忽略Visual Studio文件
+.vs/
+.vscode/
+*.VC.db
+
+## 忽略调试文件
+*.pdb
+*.ilk
+*.log
+
+## 忽略临时文件
+[Tt]emp/
+[Tt]mp/
