@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="WinUINotes.Views.AllNotesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:WinUINotes.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:WinUINotes.Models"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="NoteTemplate" x:DataType="models:Note">
+            <ItemContainer CornerRadius="{StaticResource OverlayCornerRadius}">
+                <Grid
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="{StaticResource OverlayCornerRadius}">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Margin="12,8"
+                        Text="{x:Bind Text}"
+                        TextTrimming="WordEllipsis"
+                        TextWrapping="Wrap" />
+
+                    <Border
+                        Grid.Row="1"
+                        Padding="8,6,0,6"
+                        Background="{ThemeResource SubtleFillColorSecondaryBrush}">
+                        <TextBlock
+                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                            Style="{StaticResource CaptionTextBlockStyle}"
+                            Text="{x:Bind Date}" />
+                    </Border>
+
+                </Grid>
+
+            </ItemContainer>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--
+            作用:
+            CommandBar:
+            1. 添加按钮
+            AppBarButton: 带图标的按钮
+            CommandBar.Content: 添加内容
+        -->
+        <CommandBar DefaultLabelPosition="Right">
+            <AppBarButton
+                Click="NewNoteButton_Click"
+                Icon="Add"
+                Label="New Note" />
+            <CommandBar.Content>
+                <TextBlock
+                    Margin="16,8"
+                    Style="{ThemeResource SubtitleTextBlockStyle}"
+                    Text="Quick Notes" />
+            </CommandBar.Content>
+        </CommandBar>
+
+        <!--
+            作用:
+            ItemsView:
+            1. 显示数据
+        -->
+        <ItemsView
+            Grid.Row="1"
+            Padding="16"
+            ItemTemplate="{StaticResource NoteTemplate}"
+            ItemsSource="{x:Bind notesModel.Note}"
+            SelectionMode="None"
+            IsItemInvokedEnabled="True"
+            ItemInvoked="ItemsView_ItemInvoked"
+            >
+            <ItemsView.Layout>
+                <UniformGridLayout
+                    ItemsJustification="Start"
+                    MinColumnSpacing="12"
+                    MinItemHeight="150"
+                    MinItemWidth="200"
+                    MinRowSpacing="12" />
+            </ItemsView.Layout>
+        </ItemsView>
+    </Grid>
+</Page>
